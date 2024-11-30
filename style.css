@@ -1,0 +1,174 @@
+/* Resetando estilos padrões */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+h2, h3 {
+    color: #333;
+    text-align: center;
+}
+
+.btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+/* Estilo específico para o painel de administração */
+.admin-dashboard {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+    margin: 20px;
+    text-align: center; /* Garante que o conteúdo dentro do painel esteja centralizado */
+}
+
+.admin-dashboard h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.admin-dashboard h3 {
+    font-size: 22px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* Estilo para os agendamentos e monitoramentos no painel de administração */
+#agendamentos, #monitoramentos {
+    margin-top: 20px;
+    padding: 10px;
+}
+
+#agendamentos p, #monitoramentos p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+/* Container de cliente */
+.admin-dashboard .cliente-container {
+    margin-bottom: 30px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fafafa;
+}
+
+.admin-dashboard .cliente-container h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.admin-dashboard .cliente-container p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+/* Estilo para o botão de "Apagar Todos os Dados" dentro do painel de administração */
+.btn-apagar {
+    background-color: #ff4d4d;  /* Cor vermelha */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    display: inline-block;  /* Garante que o botão ocupe uma linha própria */
+    margin: 20px auto;  /* Centraliza o botão na tela */
+    width: 50%;  /* Ajusta a largura do botão para 50% do container */
+    text-align: center;  /* Centraliza o texto dentro do botão */
+}
+
+.btn-apagar:hover {
+    background-color: #e03e3e;  /* Cor mais escura quando o mouse passa sobre o botão */
+}
+
+/* Estilo para o login */
+.login-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-container h2 {
+    font-size: 26px;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    font-size: 16px;
+    color: #333;
+}
+
+.input-group input {
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-container button:hover {
+    background-color: #45a049;
+}
+
+/* Adicionando estilo para o botão de "Voltar ao Início" */
+.btn-voltar {
+    background-color: #45a049;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    display: block;
+    margin: 20px auto;
+}
+
+.btn-voltar:hover {
+    background-color: #45a049;
+}
+
+

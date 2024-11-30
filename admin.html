@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Administrador</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function exibirDadosAdmin() {
+            // Recuperando os dados do LocalStorage
+            var agendamentos = JSON.parse(localStorage.getItem('agendamentos')) || [];
+            var monitoramentos = JSON.parse(localStorage.getItem('monitoramentos')) || [];
+
+            // Limpa a lista de agendamentos e monitoramentos na tela
+            var agendamentosContainer = document.getElementById('agendamentos');
+            var monitoramentosContainer = document.getElementById('monitoramentos');
+
+            agendamentosContainer.innerHTML = ''; // Limpar o conteúdo existente
+            monitoramentosContainer.innerHTML = ''; // Limpar o conteúdo existente
+
+            // Organizando os dados por cliente
+            var clientes = {}; // Objeto para armazenar os dados por cliente
+
+            // Armazenando os dados dos agendamentos por cliente
+            agendamentos.forEach(function(agendamento) {
+                if (!clientes[agendamento.nome]) {
+                    clientes[agendamento.nome] = { agendamentos: [], monitoramentos: [] };
+                }
+                clientes[agendamento.nome].agendamentos.push(agendamento);
+            });
+
+            // Armazenando os dados dos monitoramentos por cliente
+            monitoramentos.forEach(function(monitoramento) {
+                if (!clientes[monitoramento.nome]) {
+                    clientes[monitoramento.nome] = { agendamentos: [], monitoramentos: [] };
+                }
+                clientes[monitoramento.nome].monitoramentos.push(monitoramento);
+            });
+
+            // Exibindo os dados dos clientes
+            for (var clienteNome in clientes) {
+                var clienteDiv = document.createElement('div');
+                clienteDiv.classList.add('cliente-container');
+                
+                // Nome do cliente
+                var nomeCliente = document.createElement('h3');
+                nomeCliente.textContent = "Cliente: " + clienteNome;
+                clienteDiv.appendChild(nomeCliente);
+
+                // Exibindo os agendamentos do cliente
+                var clienteAgendamentos = clientes[clienteNome].agendamentos;
+                clienteAgendamentos.forEach(function(agendamento) {
+                    var pAgendamento = document.createElement('p');
+                    pAgendamento.textContent = "Agendamento: " + agendamento.data + " às " + agendamento.hora;
+                    clienteDiv.appendChild(pAgendamento);
+                });
+
+                // Exibindo os monitoramentos do cliente
+                var clienteMonitoramentos = clientes[clienteNome].monitoramentos;
+                clienteMonitoramentos.forEach(function(monitoramento) {
+                    var pMonitoramento = document.createElement('p');
+                    pMonitoramento.textContent = "Monitoramento: Peso: " + monitoramento.peso + "kg - Observações: " + monitoramento.observacoes;
+                    clienteDiv.appendChild(pMonitoramento);
+                });
+
+                // Adicionando a div do cliente ao painel
+                agendamentosContainer.appendChild(clienteDiv);
+            }
+        }
+
+        function apagarDados() {
+            // Apaga todos os agendamentos e monitoramentos no LocalStorage
+            localStorage.removeItem('agendamentos');
+            localStorage.removeItem('monitoramentos');
+            
+            // Recarrega a página para refletir as mudanças
+            alert('Todos os dados foram apagados.');
+            location.reload(); // Recarrega a página
+        }
+
+        window.onload = exibirDadosAdmin;
+    </script>
+</head>
+<body>
+    <div class="admin-dashboard">
+        <h2>Painel do Administrador</h2>
+        
+        <!-- Exibindo os agendamentos -->
+        <div id="agendamentos">
+            <h3>Agendamentos dos Clientes</h3>
+            <!-- Agendamentos serão exibidos aqui -->
+        </div>
+
+        <!-- Exibindo os monitoramentos -->
+        <div id="monitoramentos">
+            <h3>Monitoramentos dos Clientes</h3>
+            <!-- Monitoramentos serão exibidos aqui -->
+        </div>
+
+        <!-- Botão para apagar todos os dados -->
+        <button onclick="apagarDados()" class="btn-apagar">Apagar Todos os Dados</button>
+    </div>
+</body>
+</html>
+
+

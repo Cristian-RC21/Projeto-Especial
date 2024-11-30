@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Nutricionista</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function validarLogin(event) {
+            event.preventDefault(); // Impede o envio do formulário
+
+            // Obtendo os valores inseridos no formulário
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+
+            // Credenciais do administrador
+            var adminUsername = "admin";
+            var adminPassword = "admin123";
+
+            // Verifica se as credenciais são do administrador
+            if (username === adminUsername && password === adminPassword) {
+                // Redireciona para a página do admin
+                window.location.href = "admin.html"; // Página do Admin
+            } else {
+                // Armazena o nome do cliente corretamente no LocalStorage
+                localStorage.setItem('clienteNome', username); 
+                // Redireciona para a página do cliente
+                window.location.href = "client.html"; // Página do Cliente
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form onsubmit="validarLogin(event)">
+            <div class="input-group">
+                <label for="username">Usuário</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Senha</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn">Entrar</button>
+        </form>
+    </div>
+</body>
+</html>
+

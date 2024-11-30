@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dados Computados</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function exibirDados() {
+            // Recuperando os dados do LocalStorage
+            var agendamentos = JSON.parse(localStorage.getItem('agendamentos')) || [];
+            var monitoramentos = JSON.parse(localStorage.getItem('monitoramentos')) || [];
+
+            // Recuperando o nome do cliente
+            var nomeCliente = localStorage.getItem('clienteNome');
+
+            // Verificando se o nome do cliente existe no LocalStorage
+            if (!nomeCliente) {
+                alert('Cliente não autenticado!');
+                window.location.href = 'login.html'; // Redireciona para a página de login
+                return;
+            }
+
+            // Filtrando o último agendamento do cliente
+            var ultimoAgendamento = agendamentos.filter(function(agendamento) {
+                return agendamento.nome === nomeCliente;
+            }).pop(); // .pop() pega o último item do array
+
+            // Filtrando o último monitoramento do cliente
+            var ultimoMonitoramento = monitoramentos.filter(function(monitoramento) {
+                return monitoramento.nome === nomeCliente;
+            }).pop(); // .pop() pega o último item do array
+
+            // Exibindo o último agendamento
+            var agendamentosContainer = document.getElementById('agendamentos');
+            agendamentosContainer.innerHTML = ''; // Limpa o conteúdo anterior
+            if (ultimoAgendamento) {
+                var pAgendamento = document.createElement('p');
+                pAgendamento.textContent = "Último Agendamento: " + ultimoAgendamento.data + " às " + ultimoAgendamento.hora;
+                agendamentosContainer.appendChild(pAgendamento);
+            } else {
+                var pAgendamento = document.createElement('p');
+                pAgendamento.textContent = "Nenhum agendamento encontrado.";
+                agendamentosContainer.appendChild(pAgendamento);
+            }
+
+            // Exibindo o último monitoramento
+            var monitoramentosContainer = document.getElementById('monitoramentos');
+            monitoramentosContainer.innerHTML = ''; // Limpa o conteúdo anterior
+            if (ultimoMonitoramento) {
+                var pMonitoramento = document.createElement('p');
+                pMonitoramento.textContent = "Último Monitoramento: Peso: " + ultimoMonitoramento.peso + "kg - Observação: " + ultimoMonitoramento.observacoes;
+                monitoramentosContainer.appendChild(pMonitoramento);
+            } else {
+                var pMonitoramento = document.createElement('p');
+                pMonitoramento.textContent = "Nenhum monitoramento encontrado.";
+                monitoramentosContainer.appendChild(pMonitoramento);
+            }
+        }
+
+        function voltarInicio() {
+            window.location.href = 'index.html'; // Redireciona para a página de login ou outra página inicial
+        }
+
+        window.onload = exibirDados;
+    </script>
+</head>
+<body>
+    <div class="dados-computados-container">
+        <h2>Dados Computados</h2>
+        <div id="agendamentos">
+            <h3>Último Agendamento</h3>
+            <!-- O último agendamento será exibido aqui -->
+        </div>
+        <div id="monitoramentos">
+            <h3>Último Monitoramento</h3>
+            <!-- O último monitoramento será exibido aqui -->
+        </div>
+        
+        <!-- Botão Voltar -->
+        <button onclick="voltarInicio()" class="btn-voltar">Voltar ao Início</button>
+    </d

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha de Automonitoramento</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function salvarMonitoramento(event) {
+            event.preventDefault(); // Impede o envio do formulário
+
+            // Obtendo os valores inseridos no formulário
+            var peso = document.getElementById('peso').value;
+            var observacoes = document.getElementById('observacoes').value;
+            var nomeCliente = localStorage.getItem('clienteNome'); // Recupera o nome do cliente
+
+            // Salvando a ficha de monitoramento no LocalStorage
+            var monitoramento = {
+                nome: nomeCliente,
+                peso: peso,
+                observacoes: observacoes
+            };
+
+            var monitoramentos = JSON.parse(localStorage.getItem('monitoramentos')) || [];
+            monitoramentos.push(monitoramento);
+            localStorage.setItem('monitoramentos', JSON.stringify(monitoramentos));
+
+            // Exibe a tela de dados computados
+            window.location.href = 'dados_computados.html';
+        }
+    </script>
+</head>
+<body>
+    <div class="monitoramento-container">
+        <h2>Ficha de Automonitoramento</h2>
+        <form onsubmit="salvarMonitoramento(event)">
+            <div class="input-group">
+                <label for="peso">Peso (kg)</label>
+                <input type="number" id="peso" name="peso" required>
+            </div>
+            <div class="input-group">
+                <label for="observacoes">Observações</label>
+                <textarea id="observacoes" name="observacoes" required></textarea>
+            </div>
+            <button type="submit" class="btn">Salvar</button>
+        </form>
+    </div>
+</body>
+</html>
+
+
